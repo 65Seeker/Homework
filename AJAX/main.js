@@ -74,7 +74,37 @@ myButton.addEventListener('click', (e) => {
 //     }
 // })
 
+window.jQuery.ajax = function (url, method, body, success, fail,headers) {
+    let url
+    if(arguments.length === 1){
+        url = options.url
+    }else if (arguments.length === 2){
+        url = arguments[0]
+        options = agruments[1]
+    }
+    let method = options.method
+    let body = options.body
+    let success = options.success
+    let fail = options.fail
+    let headers = options.headers
 
+    let request = new XMLHttpRequest()
+    request.open(mothod, url)
+    for(key in headers){
+        let value = headers[key]
+        request.setRequestHeader(key, value)
+    }
+    request.onreadystatechange = ()=>{
+        if (request.readyState === 4){
+            if (request.status >= 200 && request.status <300) {
+                success.call(undefined, request.responseText)
+            }else if (request.status >= 400){
+                fail.call(undefined, request)
+            }
+        }
+    }
+    request.send(body)
+}
 
 
 
