@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>计算属性</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{fullName}} 
+        {{reverseNumber}}
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            fristName: 'xxx',
+            lastName: 'yyy',
+            number:'123,456,789',
+        },
+        computed: {
+            reverseNumber:function(){
+                return this.number.split(',').reverse().join(',');
+            },
+            fullName: function () {
+                return this.fristName + ' ' + this.lastName
+            // {
+            //     get:function () {
+            //         return this.fristName + ' ' + this.lastName
+            //     },
+            //     set:function(newName){
+            //         var name = newName.split(',');
+            //         this.fristName = name[0];
+            //         this.lastName = name[1];
+            //     }
+            // }
+        },
+        }
+    })
+    app.$watch('lastName',function(newValue,oldValue){
+        alert('我不姓'+oldValue+'我姓'+newValue)
+    })
+</script>
+
+</html>
