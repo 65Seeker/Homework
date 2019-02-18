@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-for的用法</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="el in list">
+                {{el}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(boy,index) in students">
+                {{index}}----{{boy.name}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(value,key,index) in girl">
+            {{index}}}}---{{key}}---{{value}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            list: ['aa', 'bb', 'cc', 'dd', ],
+            students: [{name: 'js'}, {name: 'vue'}, ],
+            girl: {
+                name1: 'aa',
+                name2: 'bb',
+            }
+
+        },
+        methods: {},
+    })
+</script>
+
+</html>

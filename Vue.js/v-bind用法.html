@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-bind以及class与style的绑定</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        .divstyle{background: red;}
+        .divstyle2{background: blue;}
+        .redclass{background: red;height: 20px;width: 30px;}
+        .blueclass{border:blue solid 3px;}
+    </style>
+</head>
+
+<body>
+    <div id="app">
+            <input type="button" value="点我" :class="{divstyle:red,divstyle2:blue}" @click="change">
+            <br>
+            <div :class='[redclass,blueclass]'></div>
+            <span :style='{"color":color,"fontSize":fontSize+"px"}'>hahahahahahaha</span>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            red: true,
+            blue: false,
+            redclass:'redclass',
+            blueclass:'blueclass',
+            color:'green',
+            fontSize:30,
+        },
+        methods:{
+            change:function(){
+
+                    this.red=!this.red;
+                    this.blue=!this.blue;
+
+            },
+        },
+    })
+</script>
+
+</html>
