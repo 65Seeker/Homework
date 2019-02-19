@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app{
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align:center;
+            margin:200px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <component-a ref='a'></component-a>
+        <component-b></component-b>
+        <hr>
+        <component-c ref='c'></component-c>---{{msg}}
+        <hr>
+        <button @click=getChildData>{{childData}}</button>
+    </div>
+</body>
+<script>
+    Vue.component('component-a',{
+        template:'<div><button @click="handle">点击传输数据至B组件</button></div>',
+        data:function(){
+            return {
+                file:'来自a组件的我',
+                msg:'a组件的数据'
+            };
+        },
+        methods:{
+            handle: function(){
+                this.$root.intermediary.$emit('transfer',this.file)
+            }
+        }
+    })
+
+    Vue.component('component-b',{
+        template:'<div> </div>',
+        created:function(){
+            //A组件在实例创建的时候就监听事件---transfer事件
+            this.$root.intermediary.$on('transfer',function(value){
+                alert(value)
+            })
+        }
+    })
+
+    Vue.component('component-c',{
+        template:'<div><button @click="handle">点击修改父组件数据</button></div>',
+        methods: {
+            handle:function(){
+                this.$parent.msg="数据已修改"
+            }
+        },
+        data:function(){
+                return{
+                    msg:'c组件的数据',
+                }
+            }
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+            intermediary: new Vue(),
+            msg:'父组件数据还没修改',
+            childData:'子组件数据还没拿到'
+        },
+        methods:{
+            getChildData:function(){
+                this.childData = this.$refs.a.msg;
+            }
+        }
+    })
+</script>
+</html>

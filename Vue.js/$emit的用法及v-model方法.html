@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>$emit的用法及v-model方法</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        你的余额{{total}}
+        <my-component @change="changeTotal"></my-component>
+    </div>
+
+    <hr>
+
+    <div id="app2">
+        你的剩余假期{{date}}
+        <my-component2 v-model="date"></my-component2>
+    </div>
+
+</body>
+<script>
+    Vue.component('my-component', {
+        template: '<div>\
+        <button @click= "crease">+1000</button>\
+        <button @click= "reduce">-1000</button>\
+         </div>',
+        data: function () {
+            return {
+                count: 1000
+            };
+        },
+        methods: {
+            crease: function () {
+                this.count = this.count + 1000;
+                this.$emit('change', this.count)
+            },
+            reduce: function () {
+                this.count = this.count - 1000;
+                this.$emit('change', this.count)
+            },
+        }
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            total: 1000
+        },
+        methods: {
+            changeTotal: function (value) {
+                this.total = value;
+            }
+        },
+    })
+
+    
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            date: 7
+        },
+        components: {
+            "my-component2": {
+                template: '<div>\
+                        <button @click= "crease">+1</button>\
+                        <button @click= "reduce">-1</button>\
+                        </div>',
+                data:function(){
+                    return {
+                        num:7
+                    }
+                },
+                methods:{
+                    crease:function(){
+                        this.num=this.num+1;
+                        this.$emit('input',this.num)
+                    },
+                    reduce:function(){
+                        this.num=this.num-1;
+                        this.$emit('input',this.num)
+                    } 
+                }
+            },
+        },
+    })
+</script>
+
+</html>
