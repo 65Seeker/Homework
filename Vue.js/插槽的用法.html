@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <component-a >
+            <p>我是父组件的插槽</p>
+        </component-a>
+        <hr>
+        <name-component>
+            <p>正文1</p>
+            <h3 slot="header">标题</h3>
+            <p>正文2</p>
+            <h3 slot="header">标题2</h3>
+            <p>正文3</p>
+            <footer slot="footer">页脚</footer>
+            <p>正文4</p>
+        </name-component>
+    </div>
+</body>
+<script>
+    Vue.component('component-a',{
+        template:'<div>\
+        <slot>如果父组件内没有插入内容，那么我将作为插槽的默认内容</slot>\
+        </div>',
+        data:function(){
+            return {
+            }
+        }
+    })
+    Vue.component('name-component',{
+        template:
+        '<div>\
+        <div class="header">\
+        <slot name=header>如果父组件内没有插入内容，那么我将作为插槽的默认内容</slot>\
+        </div>\
+        <div class="contatiner">\
+        <slot>如果父组件内没有插入内容，那么我将作为插槽的默认内容</slot>\
+        </div>\
+        <div class="footer">\
+        <slot name="footer">如果父组件内没有插入内容，那么我将作为插槽的默认内容</slot>\
+        </div>\
+        </div>',
+    })
+    var app = new Vue({
+        el:'#app',
+        data:{
+        },
+    })
+
+</script>
+
+</html>
