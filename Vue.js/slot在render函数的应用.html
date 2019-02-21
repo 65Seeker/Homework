@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app {
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align: center;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <child>
+            <p>12345</p>
+            <p>上山打老虎</p>
+            <header slot="header">我是标题</header>
+            <footer slot="footer">我是页脚</footer>
+        </child>
+    </div>
+</body>
+<script>
+    Vue.component('child',{
+        render:function(createElement){
+            var header=this.$slots.header;
+            var footer=this.$slots.footer;
+            var main = this.$slots.default;
+            return createElement('div',[
+                createElement('header',header),
+                createElement('main',main),
+                createElement('footer',footer),
+            ])
+        }
+    })
+    var app= new Vue({
+        el:'#app',
+        data:{},
+    })
+</script>
+</html>

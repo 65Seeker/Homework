@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app {
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align: center;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <child>
+            <template scope="propsss">
+                {{propsss.text}}
+            </template>
+        </child>
+    </div>
+</body>
+<script>
+    Vue.component('child',{
+        render:function(createElement){
+            //以下代码相当于<div>  <slot :text="text"></slot>  </div>
+            return createElement('div',this.$scopedSlots.default({   //default的用法不明！待解决
+            text:'子组件传递的数据'                
+            }))
+        }
+    })
+    var app =new Vue({
+        el:'#app',
+        data:{}
+    })
+</script>
+</html>

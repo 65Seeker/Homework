@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app {
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align: center;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <child value="haha">
+        </child>
+    </div>
+</body>
+<script>
+    // this.text----context.props.text
+    //this.$slots.default-----context.childr
+    Vue.component('child', {
+        functional: true,
+        render: function (createElement, context) {
+            return createElement('button', {
+                on: {
+                    click: function () {
+                        console.log(context)
+                        console.log(context.parent)
+                        console.log(context.parent.msg) //父组件内容
+                        console.log(context.props.value) //子组件内容 此处this指向window
+                    }
+                }
+            }, '点击了解context')
+        },
+        props: ['value']
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            msg: '我是父组件的内容'
+        },
+        methods: {},
+    })
+</script>
+
+</html>

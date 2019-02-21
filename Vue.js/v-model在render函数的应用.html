@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app {
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align: center;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <child :name='name' @input='showName'></child>
+        <br>
+        {{name}}
+    </div>
+</body>
+<script>
+    Vue.component('child', {
+        render: function (createElement) {
+            var self = this 
+            //这个this = 当前的VUE实例
+            return createElement('input', {
+                domProps: {
+                    value: self.name
+                },
+                on: {
+                    input: function (event) {
+                        self.$emit('input', event.target.value)
+                         //第一个参数是父组件中的自定义事件，我们通过触发该事件将event.target.value作为事件中的value传给父组件
+                         //此处的如果使用this 将被指向window而不是Vue实例，所以我们要将进入这个方法时就Vue实例赋值给一个变量，即self
+                    }
+                }
+            })
+        }
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            name: 'asdasd',
+        },
+        methods: {
+            showName: function (value) {
+                this.name = value
+            }
+        }
+    })
+</script>
+
+</html>
