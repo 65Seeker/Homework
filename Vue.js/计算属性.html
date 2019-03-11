@@ -11,8 +11,11 @@
 
 <body>
     <div id="app">
-        {{fullName}} 
+        {{fullName}}
         {{reverseNumber}}
+    </div>
+    <div id="cart">
+        购物车总价： {{prices}}
     </div>
 </body>
 <script>
@@ -21,29 +24,67 @@
         data: {
             fristName: 'xxx',
             lastName: 'yyy',
-            number:'123,456,789',
+            number: '123,456,789',
         },
         computed: {
-            reverseNumber:function(){
+            reverseNumber: function () {
                 return this.number.split(',').reverse().join(',');
             },
             fullName: function () {
                 return this.fristName + ' ' + this.lastName
-            // {
-            //     get:function () {
-            //         return this.fristName + ' ' + this.lastName
-            //     },
-            //     set:function(newName){
-            //         var name = newName.split(',');
-            //         this.fristName = name[0];
-            //         this.lastName = name[1];
-            //     }
-            // }
-        },
+                // {
+                //     get:function () {
+                //         return this.fristName + ' ' + this.lastName
+                //     },
+                //     set:function(newName){
+                //         var name = newName.split(',');
+                //         this.fristName = name[0];
+                //         this.lastName = name[1];
+                //     }
+                // }
+            },
         }
     })
-    app.$watch('lastName',function(newValue,oldValue){
-        alert('我不姓'+oldValue+'我姓'+newValue)
+    app.$watch('lastName', function (newValue, oldValue) {
+        alert('我不姓' + oldValue + '我姓' + newValue)
+    })
+
+    var app2 = new Vue({
+        el: '#cart',
+        data: {
+            cart1: [{
+                name: 'iphone',
+                price: 5000,
+                count: 1
+            }, {
+                name: 'ipod',
+                price: 2000,
+                count: 1
+            }],
+            cart2: [{
+                name: 'iphone',
+                price: 5000,
+                count: 1
+            }, {
+                name: 'ipod',
+                price: 2000,
+                count: 1
+            }]
+        },
+        computed: {
+            prices: function () {
+                var prices = 0;
+                for (var i = 0; i < this.cart1.length; i++) {
+                    prices += this.cart1[i].price * this.cart1[i].count;
+                }
+                console.log(prices)
+                for (var j = 0; j < this.cart2.length; j++) {
+                    prices += this.cart2[j].price * this.cart2[j].count;
+                }
+                console.log(prices)
+                return prices
+            }
+        }
     })
 </script>
 
