@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app {
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align: center;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="handle()">+1</button>
+        {{count}}<hr>
+        <button @click="handle2">+1</button>
+        {{count2}}<hr>
+        <button @click="handle3">+1</button>
+        {{count3}}
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+            count2:0,
+            count3:0
+        },
+        methods: {
+            handle: function (num) {
+                num = num || 1;
+                this.count += num
+            },
+            handle2:function (num) {
+                num = num || 1;
+                this.count2 += num
+            },
+            handle3:function () {
+                // num = num || 1;
+                this.count3 += 1
+            }
+        },
+    })
+</script>
+
+</html>

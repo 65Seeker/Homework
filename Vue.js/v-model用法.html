@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="text" >
+        <textarea name="" id="" v-model="msg" cols="30" rows="10">213124123123</textarea>
+        <br>
+        单个单选框 【v-bind】
+        西瓜<input type="radio" v-bind:checked="oneradio" value="西瓜"><br>
+        当前选中————{{oneradio}}
+        <hr>
+        多个单选框 【用v-model】<br>
+        猫<input type="radio" name="checked" value="猫" v-model="check1"><br>
+        狗<input type="radio" name="checked" value="狗" v-model="check1"><br>
+        猪<input type="radio" name="checked" value="猪" v-model="check1"><br>
+        当前选中————{{check1}}
+        <hr>
+        单个复选框 【v-bind】【v-model】<br>
+        v-model<input type="checkbox" name="checks" v-model="check2"><br>
+        v-bind<input type="checkbox" name="checks" v-bind:checked="check2">
+        <hr>
+        多个复选框【用v-model】<br>
+        虎<input type="checkbox" name="checks" value="虎" v-model="animals">
+        狼<input type="checkbox" name="checks" value="狼" v-model="animals">
+        狮<input type="checkbox" name="checks" value="狮" v-model="animals">
+        <br>
+        现在选中的是{{animals}}
+        <hr>
+        单选下拉框
+        <select name="" v-model="fruits1">
+            <option value="梨">梨</option>
+            <option value="桃">桃</option>
+            <option value="杏">杏</option>
+        </select>
+        <br>
+        现在选中的是{{fruits1}}
+        <hr>
+        多选下拉框<br>
+        <select name="" v-model="fruits2" multiple>
+                <option value="梨">梨</option>
+                <option value="桃">桃</option>
+                <option value="杏">杏</option>
+            </select>
+            <br>
+        现在选中的是{{fruits2}}
+
+        <hr>
+        <br>
+        单个单选框 通过v-model获取v-bind绑定的value
+        西瓜<input type="radio" v-model="picked" v-bind:value="value"><br>
+        当前选中————{{picked}}
+        <hr>
+        复选框 通过v-model获取value
+        <input type="checkbox" v-model="toggle" :true-value="value1" :false-value="value2">
+        <br>
+        {{toggle}}
+        {{toggle==value1}}
+        {{toggle==value2}}
+        <hr>
+        下拉框 通过v-model获取value
+        <select name="" v-model="fruits3" >
+            <option :value="{fruit:'apple'}">苹果</option>
+        </select>
+        现在选中的是{{typeof fruits3}}——————{{fruits3.fruit}}
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            text:'万事如意',
+            msg:'万事如意',
+            oneradio:false,
+            check1:'猫',
+            check2:true,
+            animals:[],
+            fruits1:'',
+            fruits2:'',
+            value:'西瓜',
+            picked:'',
+            value1:'我被选中',
+            value2:'没被选中',
+            toggle:'',
+            fruits3:''
+
+        },
+        methods: {},
+    })
+</script>
+
+</html>

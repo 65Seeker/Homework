@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app {
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align: center;
+            margin: 200px auto;
+        }
+        .parent{
+            height: 100px;
+            width: 100px;
+            background: brown;
+        }
+        .son{
+            height: 25px;
+            width: 25px; 
+            background:pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="parent" @click="handle2">
+            <div class="son" @click.stop="handle1"></div>
+        </div>
+
+        <hr>
+        <form action="" @submit.prevent="handle3">
+            <textarea name="demo" cols="30" rows="10"></textarea>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            handle1:function(){
+                alert('儿子')
+            },
+            handle2:function(){
+                alert('爸爸')
+            },
+            handle3:function(){
+                alert('没有重载')
+            }
+        },
+    })
+</script>
+
+</html>
