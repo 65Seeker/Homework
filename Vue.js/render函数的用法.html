@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app {
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align: center;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <child></child>
+    </div>
+</body>
+<script>
+    Vue.component('child',{
+        render:function(createElement){
+            return createElement({
+                template:'<div> 今天\
+                            <div> 是个\
+                                <span>好日子\
+                                </span>\
+                            </div>\
+                        </div> '
+            },{
+                class:'aaa',
+                style:{
+                    color:'red',
+                    fontSize:'16px',
+                },
+                // domProps:{
+                //     innerHTML:'<span style="color:blue">好个屁</span>'
+                // }, 会覆盖上面的template
+                attrs:{
+                    // class:'bbb', 也会覆盖上面的class
+                    src:'http://baidu.com'
+                }
+            },[createElement('h1','我是h1标题')])  //只有在第一个参数是string的时候
+        },
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+    })
+</script>
+
+</html>

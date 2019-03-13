@@ -39,11 +39,11 @@
         },
         methods: {
             crease: function () {
-                this.count = this.count + 1000;
+                this.count += 1000;
                 this.$emit('change', this.count)
             },
             reduce: function () {
-                this.count = this.count - 1000;
+                this.count -= 1000;
                 this.$emit('change', this.count)
                 //第一个参数是父组件中的自定义事件，我们通过触发该事件将this.count作为事件中的value传给父组件
             },
@@ -56,6 +56,7 @@
         },
         methods: {
             changeTotal: function (value) {
+                //此处的形参就是传递过来的参数
                 this.total = value;
             }
         },

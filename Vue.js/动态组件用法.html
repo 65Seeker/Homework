@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
+    <style>
+        #app {
+            height: 300px;
+            width: 300px;
+            border: solid 3px black;
+            text-align: center;
+            margin: 200px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <component :is="子组件名"></component>
+        <button @click="handle('A')">1</button>
+        <button @click="handle('B')">2</button>
+        <button @click="handle('C')">3</button>
+        <button @click="handle('D')">4</button>
+    </div>
+</body>
+<script>
+    Vue.component('compA',{
+        template:'<div>白日依山尽</div>'
+    })
+    Vue.component('compB',{
+        template:'<div>黄河入海流</div>'
+    })
+    Vue.component('compC',{
+        template:'<div>欲穷千里目</div>'
+    })
+    Vue.component('compD',{
+        template:'<div>更上一层楼</div>'
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            子组件名:'compA',
+        },
+        methods: {
+            handle:function(tag){
+                this.子组件名='comp'+tag
+            }
+        },
+    })
+</script>
+
+</html>

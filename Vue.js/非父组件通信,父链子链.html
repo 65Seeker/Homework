@@ -37,7 +37,7 @@
         },
         methods:{
             handle: function(){
-                this.$root.intermediary.$emit('transfer',this.file)
+                this.$root.bus.$emit('transfer',this.file)
             }
         }
     })
@@ -46,7 +46,7 @@
         template:'<div> </div>',
         created:function(){
             //A组件在实例创建的时候就监听事件---transfer事件
-            this.$root.intermediary.$on('transfer',function(value){
+            this.$root.bus.$on('transfer',function(value){
                 alert(value)
             })
         }
@@ -68,7 +68,7 @@
     var app = new Vue({
         el:'#app',
         data:{
-            intermediary: new Vue(),
+            bus: new Vue(),
             msg:'父组件数据还没修改',
             childData:'子组件数据还没拿到'
         },

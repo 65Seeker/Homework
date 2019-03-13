@@ -9,11 +9,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.4/vue.min.js"></script>
     <style>
         #app {
-            height: 300px;
-            width: 300px;
+            height: 600px;
+            width: 600px;
             border: solid 3px black;
             text-align: center;
-            margin: 200px auto;
+            margin: 50px auto;
         }
         .parent{
             height: 100px;
@@ -31,28 +31,45 @@
 <body>
     <div id="app">
         <div class="parent" @click="handle2">
+        [STOP]阻止默认向上冒泡的事件
             <div class="son" @click.stop="handle1"></div>
         </div>
 
         <hr>
+        [prevent] 使表单提交不会重载页面
         <form action="" @submit.prevent="handle3">
             <textarea name="demo" cols="30" rows="10"></textarea>
             <button type="submit">提交</button>
         </form>
+        <hr>
+        [lazy]可以使输入的数据在失去焦点或者敲回车键之后再更新
+        <input type="text" v-model="msg">---{{msg}} <br>
+        <input type="text" v-model.lazy="lazyMsg">---{{lazyMsg}} 
+        <hr>
+        [number] 将原本被转化为字符串的数字保持number的类型
+        <input type="text" v-model.number="num">---{{num}}---{{typeof num}}
+        <hr>
+        [trim]自动过滤输入过程中收尾输入的空格
+        <input type="text" v-model.trim="trimStr">---{{trimStr.split('').length}}
     </div>
 </body>
 <script>
     var app = new Vue({
         el: '#app',
-        data: {},
+        data: {
+            msg:'',
+            lazyMsg:'',
+            num:'',
+            trimStr:''
+        },
         methods: {
-            handle1:function(){
+            handle1: function () {
                 alert('儿子')
             },
-            handle2:function(){
+            handle2: function () {
                 alert('爸爸')
             },
-            handle3:function(){
+            handle3: function () {
                 alert('没有重载')
             }
         },

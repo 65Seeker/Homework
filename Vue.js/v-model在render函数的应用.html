@@ -23,6 +23,8 @@
         <child :name='name' @input='showName'></child>
         <br>
         {{name}}
+        <hr>
+        <child :name='name' v-model="name"></child>
     </div>
 </body>
 <script>
@@ -42,7 +44,8 @@
                     }
                 }
             })
-        }
+        },
+        props:['name']
     })
     var app = new Vue({
         el: '#app',
